@@ -2,16 +2,10 @@
 import { GoogleGenAI } from "@google/genai";
 
 export async function getAIConsultantResponse(prompt: string): Promise<string> {
-  // Safety check to prevent app crash if process.env is missing (e.g. static GitHub Pages deployment)
-  const apiKey = typeof process !== 'undefined' && process.env ? process.env.API_KEY : null;
-  
-  if (!apiKey) {
-    console.error("Gemini API Key missing in process.env");
-    return "The AI consultant is currently offline as the API key is not configured. Please contact administration.";
-  }
+  // Always use the process.env.API_KEY directly as per guidelines
+  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
   try {
-    const ai = new GoogleGenAI({ apiKey: apiKey });
     const response = await ai.models.generateContent({
       model: 'gemini-3-flash-preview',
       contents: prompt,
@@ -36,6 +30,7 @@ export async function getAIConsultantResponse(prompt: string): Promise<string> {
       },
     });
 
+    // Use .text property directly (do not call as method)
     return response.text || "I'm having trouble thinking right now. Could you rephrase that?";
   } catch (error) {
     console.error("Gemini API Error:", error);
