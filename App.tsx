@@ -19,11 +19,10 @@ import { AdminDashboard } from './pages/AdminDashboard';
 import { About } from './pages/About';
 import { Services } from './pages/Services';
 
-// --- Initial Mock Data ---
 const INITIAL_SITE_CONTENT: SiteContent = {
   landing: {
     heroHeadline: "Build Smarter.\nConvert Faster.",
-    heroSubheadline: "We combine cutting-edge AI strategy with high-performance design to create digital systems that actually drive revenue.",
+    heroSubheadline: "We combine cutting-edge AI strategy with high-performance design to create digital systems that actually drive revenue in the Indian market.",
     heroCtaPrimary: "Get Free Consultation",
     heroCtaSecondary: "Book a Demo"
   },
@@ -54,12 +53,26 @@ const INITIAL_SERVICES: Service[] = [
     id: 'service-web',
     name: 'Website Design',
     slug: 'website-design',
-    shortDescription: 'Performance-driven websites built for speed, clarity, and conversions.',
-    fullDescription: 'We build high-performance business machines designed to turn visitors into lifelong customers.',
+    shortDescription: 'Optimized for Indian mobile networks. Predictive UI that converts traffic.',
+    fullDescription: 'We build high-performance business machines designed to turn visitors into lifelong customers with Hinglish support and local payment integration.',
     icon: 'Layout',
-    features: [{ title: "Hyper-Fast Loading", desc: "Speed is a ranking factor." }],
-    process: [{ step: "01", title: "Strategy", desc: "We analyze goals." }],
-    faqs: [{ question: "How long?", answer: "Usually 4-6 weeks." }],
+    features: [
+      { title: "Mobile-First for India", desc: "90%+ traffic is mobile in India. We prioritize speed." },
+      { title: "Local Payment Ready", desc: "Razorpay, Paytm, and UPI gateways integration." },
+      { title: "AI Hinglish Copy", desc: "Communicate like your local customers." }
+    ],
+    process: [
+      { step: "01", title: "Strategy Audit", desc: "Analyzing your conversion gaps." },
+      { step: "02", title: "AI Build", desc: "Engineering your custom solution." }
+    ],
+    faqs: [
+      { question: "How long is delivery?", answer: "Usually within 7-14 days depending on plan." }
+    ],
+    pricingPlans: [
+      { id: 'p1', name: 'Starter', price: '₹24,999', description: 'Ideal for Indian startups.', features: ['Landing Page', 'Maintenance: ₹7,000/mo', 'Razorpay Ready'], ctaText: 'Launch Site', isHighlighted: false },
+      { id: 'p2', name: 'Growth', price: '₹59,999', description: 'Scale your business.', features: ['Up to 5 Pages', 'Maintenance: ₹7,000/mo', 'WhatsApp API'], ctaText: 'Get Growth', isHighlighted: true },
+      { id: 'p3', name: 'Elite', price: 'Custom', description: 'Enterprise solutions.', features: ['D2C Store', 'Custom Support', 'AI Chatbots'], ctaText: 'Contact Strategy', isHighlighted: false }
+    ],
     image: 'https://picsum.photos/seed/web/800/600',
     status: 'active',
     visibility: 'show',
@@ -70,12 +83,24 @@ const INITIAL_SERVICES: Service[] = [
     id: 'service-ugc',
     name: 'UGC Ads',
     slug: 'ugc-ads',
-    shortDescription: 'Creator-style video ads that scale profitably.',
-    fullDescription: 'Authentic, creator-style UGC video ads that improve engagement and increase ROAS.',
+    shortDescription: 'Authentic creator-style ads designed to scale Indian D2C brands.',
+    fullDescription: 'Stop the scroll with authentic creator content that builds trust and drives ROAS for Indian audiences.',
     icon: 'Video',
-    features: [{ title: "Tested Hooks", desc: "Scroll-stopping openers." }],
-    process: [{ step: "01", title: "Research", desc: "Audience strategy." }],
-    faqs: [{ question: "What platforms?", answer: "Meta, TikTok, and YouTube." }],
+    features: [
+      { title: "Regional Creators", desc: "Access creators across Tier-1 and Tier-2 cities." },
+      { title: "Trust Building", desc: "Authentic storytelling that relates to locals." }
+    ],
+    process: [
+      { step: "01", title: "Hook Creation", desc: "Writing scripts that grab attention." }
+    ],
+    faqs: [
+      { question: "Can we use regional languages?", answer: "Yes, we support Hindi and major regional dialects." }
+    ],
+    pricingPlans: [
+      { id: 'u1', name: 'Flash', price: '₹19,999', description: 'Testing ad hooks.', features: ['3 Videos', '1 Local Creator', 'Reels Format'], ctaText: 'Buy Flash', isHighlighted: false },
+      { id: 'u2', name: 'Ignite', price: '₹49,999', description: 'Scale profitably.', features: ['10 Videos', '3 Creators', 'Data Audit'], ctaText: 'Scale Now', isHighlighted: true },
+      { id: 'u3', name: 'Dominate', price: '₹99,999', description: 'Full coverage.', features: ['25+ Videos', 'Unlimited Network', 'Daily Sync'], ctaText: 'Book Strategy', isHighlighted: false }
+    ],
     image: 'https://picsum.photos/seed/ugc/800/600',
     status: 'active',
     visibility: 'show',
@@ -86,12 +111,24 @@ const INITIAL_SERVICES: Service[] = [
     id: 'service-qr',
     name: 'AI QR Solutions',
     slug: 'ai-qr-solutions',
-    shortDescription: 'Smart QR screens that connect offline to online.',
-    fullDescription: 'AI QR Screen Solutions transform offline engagement into actionable digital insights, driving leads and analytics.',
+    shortDescription: 'Smart engagement systems for local Indian retail and malls.',
+    fullDescription: 'Transform offline footfall into digital leads instantly using AI-powered smart screens.',
     icon: 'QrCode',
-    features: [{ title: "Live Analytics", desc: "Track every scan." }],
-    process: [{ step: "01", title: "Provision", desc: "Identify locations." }],
-    faqs: [{ question: "Do I need hardware?", answer: "No, we work with existing screens." }],
+    features: [
+      { title: "WhatsApp First", desc: "Direct-to-chat redirections for Indian consumers." },
+      { title: "Live Footfall", desc: "Track every scan in real-time." }
+    ],
+    process: [
+      { step: "01", title: "Deployment", desc: "Setting up screens in prime locations." }
+    ],
+    faqs: [
+      { question: "Is it subscription based?", answer: "Yes, with a monthly maintenance fee." }
+    ],
+    pricingPlans: [
+      { id: 'q1', name: 'Boutique', price: '₹4,999/mo', description: 'Local shop owners.', features: ['5 Screens', 'Maintenance: ₹7,000/mo', 'WhatsApp Link'], ctaText: 'Equip Store', isHighlighted: false },
+      { id: 'q2', name: 'Standard', price: '₹14,999/mo', description: 'Multi-location venues.', features: ['50 Screens', 'Maintenance: ₹7,000/mo', 'Heatmaps'], ctaText: 'Go Pro', isHighlighted: true },
+      { id: 'q3', name: 'Enterprise', price: 'Custom', description: 'Shopping mall scale.', features: ['Unlimited Fleet', 'White-label UI', 'Custom API'], ctaText: 'Talk Sales', isHighlighted: false }
+    ],
     image: 'https://picsum.photos/seed/qr/800/600',
     status: 'active',
     visibility: 'show',
@@ -161,7 +198,6 @@ const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<Page>('home');
   const [isAdminAuth, setIsAdminAuth] = useState(false);
   
-  // CMS State
   const [siteContent, setSiteContent] = useState<SiteContent>(INITIAL_SITE_CONTENT);
   const [services, setServices] = useState<Service[]>(INITIAL_SERVICES);
   const [blogs, setBlogs] = useState<BlogPost[]>(INITIAL_BLOGS);
@@ -322,34 +358,6 @@ const Home = ({ onNavigate, services, ugcAds, siteContent }: { onNavigate: (p: P
        </div>
     </section>
 
-    <section className="py-32 px-6 bg-zinc-950/50">
-       <div className="max-w-7xl mx-auto">
-          <SectionHeader centered highlight="Investment" title="Flexible Plans for Scaling" subtitle="Choose the engine that matches your growth ambitions." />
-          <div className="grid md:grid-cols-3 gap-8">
-             {[
-               { tier: "Starter", price: "Contact", features: ["Performance Website", "3 Custom UGC Ads", "Email Support", "Monthly Analytics"], cta: "Inquire Now", highlight: false },
-               { tier: "Growth", price: "Most Popular", features: ["Full Funnel Design", "10 Monthly UGC Ads", "AI QR Integration", "24/7 Priority Support", "Weekly Strategy Calls"], cta: "Get Growth Plan", highlight: true },
-               { tier: "Elite", price: "Custom", features: ["Multi-Store AI Screens", "Unlimited Creative", "Dedicated Account Manager", "White-Label Reports", "Custom AI Integrations"], cta: "Contact Sales", highlight: false }
-             ].map((plan, i) => (
-                <div key={i} className={`p-10 rounded-[50px] border transition-all flex flex-col ${plan.highlight ? 'bg-blue-600 border-blue-400 scale-105 shadow-2xl shadow-blue-600/30' : 'glass-card border-white/5'}`}>
-                   <h4 className="text-[10px] font-black uppercase tracking-widest mb-4 opacity-70">{plan.tier}</h4>
-                   <div className="text-3xl font-black mb-10">{plan.price}</div>
-                   <div className="space-y-4 mb-12 flex-grow">
-                      {plan.features.map((f, fi) => (
-                        <div key={fi} className="flex items-center gap-3 text-sm font-medium">
-                           <CheckCircle2 size={16} className={plan.highlight ? 'text-white' : 'text-blue-500'} /> {f}
-                        </div>
-                      ))}
-                   </div>
-                   <button onClick={() => onNavigate('contact')} className={`w-full py-5 rounded-2xl font-black transition-all active:scale-95 ${plan.highlight ? 'bg-white text-blue-600 shadow-xl' : 'bg-white/10 text-white hover:bg-white/20'}`}>
-                      {plan.cta}
-                   </button>
-                </div>
-             ))}
-          </div>
-       </div>
-    </section>
-
     <section className="py-48 px-6 text-center relative overflow-hidden">
        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl h-[400px] bg-purple-600/20 blur-[140px] rounded-full -z-10" />
        <div className="max-w-4xl mx-auto">
@@ -418,7 +426,6 @@ const Contact = ({ onNavigate }: { onNavigate: (p: Page) => void }) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    // Simulate API call
     setTimeout(() => {
       setIsSubmitting(false);
       setSubmitted(true);

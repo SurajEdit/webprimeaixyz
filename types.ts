@@ -19,16 +19,28 @@ export interface ServiceFAQ {
   answer: string;
 }
 
+export interface PricingPlan {
+  id: string;
+  name: string;
+  price: string;
+  description: string;
+  features: string[];
+  ctaText: string;
+  isHighlighted: boolean;
+  maintenanceFee?: string;
+}
+
 export interface Service {
   id: string;
   name: string;
   slug: string;
   shortDescription: string;
   fullDescription: string;
-  icon: string;
+  icon: 'Layout' | 'Video' | 'QrCode';
   features: ServiceFeature[];
   process: ServiceProcessStep[];
   faqs: ServiceFAQ[];
+  pricingPlans: PricingPlan[];
   image: string;
   status: 'active' | 'inactive';
   visibility: 'show' | 'hide';
@@ -56,7 +68,7 @@ export interface Project {
   name: string;
   client: string;
   category: string;
-  stat: string; // e.g. "+42% Conversion"
+  stat: string;
   description: string;
   image: string;
   url?: string;
