@@ -1,10 +1,17 @@
 
 import { GoogleGenAI } from "@google/genai";
 
-// Use process.env.API_KEY directly as required by the guidelines.
 export async function getAIConsultantResponse(prompt: string): Promise<string> {
+  // Safety check to prevent app crash if process.env is missing (e.g. static GitHub Pages deployment)
+  const apiKey = typeof process !== 'undefined' && process.env ? process.env.API_KEY : null;
+  
+  if (!apiKey) {
+    console.error("Gemini API Key missing in process.env");
+    return "The AI consultant is currently offline as the API key is not configured. Please contact administration.";
+  }
+
   try {
-    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY as string });
+    const ai = new GoogleGenAI({ apiKey: apiKey });
     const response = await ai.models.generateContent({
       model: 'gemini-3-flash-preview',
       contents: prompt,
@@ -24,7 +31,7 @@ export async function getAIConsultantResponse(prompt: string): Promise<string> {
         - Phone / WhatsApp: +91 95992 03951
         - Locations: Specializing in high-impact solutions for modern businesses.
         
-        Your Goal: Be a helpful, conversion-focused strategist. Help users understand how our services solve their business problems (e.g., low conversion, high ad fatigue, offline engagement gaps). Encourage them to book a free consultation or demo.`,
+        Your Goal: Be a helpful, conversion-focused strategist. Help users understand how our services solve their business problems. Encourage them to book a free consultation or demo.`,
         temperature: 0.7,
       },
     });
