@@ -4,7 +4,7 @@ import {
   Menu, X, Sparkles, Layout, Video, QrCode, 
   Instagram, Twitter, Linkedin, Mail, Phone,
   ChevronRight, ArrowRight, CheckCircle2, 
-  ArrowUpRight, Target, Zap, ShieldCheck,
+  Target, Zap, ShieldCheck,
   Rocket, Store, Megaphone, ShoppingBag, Plus, Minus,
   Lock
 } from 'lucide-react';
@@ -535,6 +535,13 @@ const App: React.FC = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [currentPage]);
 
+  // Secure navigation logic for admin access
+  useEffect(() => {
+    if (currentPage === 'admin' && !isAdminAuthenticated) {
+      setCurrentPage('admin-login');
+    }
+  }, [currentPage, isAdminAuthenticated]);
+
   const navigate = (page: Page) => {
     setCurrentPage(page);
     setIsMenuOpen(false);
@@ -554,19 +561,11 @@ const App: React.FC = () => {
   };
 
   const renderPage = () => {
-    if (currentPage === 'admin-login') {
-      return <AdminLogin onLogin={() => { setIsAdminAuthenticated(true); navigate('admin'); }} onBack={() => navigate('home')} />;
-    }
-    
-    if (currentPage === 'admin') {
-      if (!isAdminAuthenticated) {
-        navigate('admin-login');
-        return null;
-      }
-      return <AdminDashboard onLogout={() => { setIsAdminAuthenticated(false); navigate('home'); }} />;
-    }
-
     switch (currentPage) {
+      case 'admin-login':
+        return <AdminLogin onLogin={() => { setIsAdminAuthenticated(true); navigate('admin'); }} onBack={() => navigate('home')} />;
+      case 'admin':
+        return isAdminAuthenticated ? <AdminDashboard onLogout={() => { setIsAdminAuthenticated(false); navigate('home'); }} /> : null;
       case 'home': return <Home onNavigate={navigate} />;
       case 'about': return <About onNavigate={navigate} />;
       case 'services': return <ServicesHub onNavigate={navigate} />;
