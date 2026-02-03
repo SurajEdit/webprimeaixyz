@@ -48,56 +48,12 @@ export interface Service {
   sortOrder: number;
 }
 
-export interface BlogPost {
-  id: string;
-  title: string;
-  slug: string;
-  excerpt: string;
-  content: string;
-  date: string;
-  category: string;
-  image: string;
-  status: 'draft' | 'published';
-  visibility: 'show' | 'hide';
-  seoTitle?: string;
-  seoDescription?: string;
-}
-
-export interface Project {
+export interface Testimonial {
   id: string;
   name: string;
-  client: string;
-  category: string;
-  stat: string;
-  description: string;
-  image: string;
-  url?: string;
-  status: 'live' | 'planning' | 'hidden';
-  visibility: 'show' | 'hide';
-}
-
-export interface UgcAd {
-  id: string;
-  title: string;
-  creator: string;
-  description: string;
-  platform: 'TikTok' | 'Meta' | 'YouTube' | 'Custom';
-  thumbnail: string;
-  videoUrl: string;
-  status: 'published' | 'draft';
-  isFeatured: boolean;
-  metrics: { views: string; roas: string };
-  visibility: 'show' | 'hide';
-  autoplay: boolean;
-  mute: boolean;
-  loop: boolean;
-}
-
-export interface TeamMember {
-  id: string;
-  name: string;
-  role: string;
-  image: string;
+  company: string;
+  quote: string;
+  rating: number;
 }
 
 export interface SiteContent {
@@ -106,6 +62,8 @@ export interface SiteContent {
     heroSubheadline: string;
     heroCtaPrimary: string;
     heroCtaSecondary: string;
+    features: { title: string; desc: string; icon: string }[];
+    testimonials: Testimonial[];
   };
   about: {
     missionHeadline: string;
@@ -126,15 +84,49 @@ export interface SiteContent {
   };
 }
 
-export interface Lead {
+export interface BlogPost {
+  id: string;
+  title: string;
+  slug: string;
+  excerpt: string;
+  content: string;
+  date: string;
+  category: string;
+  image: string;
+  status: 'draft' | 'published';
+  visibility: 'show' | 'hide';
+}
+
+export interface Project {
   id: string;
   name: string;
-  email: string;
-  phone: string;
-  service: string;
-  status: 'new' | 'contacted' | 'closed';
-  date: string;
-  message: string;
+  client: string;
+  category: string;
+  stat: string;
+  description: string;
+  image: string;
+  visibility: 'show' | 'hide';
+}
+
+export interface UgcAd {
+  id: string;
+  title: string;
+  creator: string;
+  description: string;
+  platform: 'TikTok' | 'Meta' | 'YouTube' | 'Custom';
+  thumbnail: string;
+  videoUrl: string;
+  status: 'published' | 'draft';
+  isFeatured: boolean;
+  metrics: { views: string; roas: string };
+  visibility: 'show' | 'hide';
+}
+
+export interface TeamMember {
+  id: string;
+  name: string;
+  role: string;
+  image: string;
 }
 
 export interface Message {

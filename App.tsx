@@ -24,7 +24,16 @@ const INITIAL_SITE_CONTENT: SiteContent = {
     heroHeadline: "Build Smarter.\nConvert Faster.",
     heroSubheadline: "We combine cutting-edge AI strategy with high-performance design to create digital systems that actually drive revenue in the Indian market.",
     heroCtaPrimary: "Get Free Consultation",
-    heroCtaSecondary: "Book a Demo"
+    heroCtaSecondary: "Book a Demo",
+    features: [
+      { title: "AI-Driven UX", desc: "Predictive interfaces that adapt to user behavior.", icon: "Sparkles" },
+      { title: "Conversion First", desc: "Every pixel engineered for lead generation.", icon: "Target" },
+      { title: "Cloud Scale", desc: "High-speed hosting optimized for Indian networks.", icon: "Zap" }
+    ],
+    testimonials: [
+      { id: '1', name: "Julian Thorne", company: "Lumina Tech", quote: "Web Prime AI didn't just redesign our site; they rebuilt our entire sales process.", rating: 5 },
+      { id: '2', name: "Sarah Jenkins", company: "Aura Skincare", quote: "The UGC ads they produced feel so authentic that our target audience stopped scrolling.", rating: 5 }
+    ]
   },
   about: {
     missionHeadline: "Design Meets Intelligence.",
@@ -142,14 +151,12 @@ const INITIAL_BLOGS: BlogPost[] = [
 ];
 
 const INITIAL_PORTFOLIO: Project[] = [
-  { id: 'p1', name: "Lumina Tech Redesign", client: "Lumina Tech", category: "Web Design", stat: "+42% Conversion", description: "Full redesign project.", image: "https://picsum.photos/seed/web/800/600", status: 'live', visibility: 'show' }
+  { id: 'p1', name: "Lumina Tech Redesign", client: "Lumina Tech", category: "Web Design", stat: "+42% Conversion", description: "Full redesign project.", image: "https://picsum.photos/seed/web/800/600", visibility: 'show' }
 ];
 
 const INITIAL_UGC_ADS: UgcAd[] = [
-  { id: 'u1', title: "Creator Review - Skincare", creator: "Sarah J.", description: "Organic product review.", platform: 'TikTok', thumbnail: "https://picsum.photos/seed/v1/400/700", videoUrl: "", status: 'published', isFeatured: true, metrics: { views: "45k", roas: "3.2x" }, visibility: 'show', autoplay: true, mute: true, loop: true }
+  { id: 'u1', title: "Creator Review - Skincare", creator: "Sarah J.", description: "Organic product review.", platform: 'TikTok', thumbnail: "https://picsum.photos/seed/v1/400/700", videoUrl: "", status: 'published', isFeatured: true, metrics: { views: "45k", roas: "3.2x" }, visibility: 'show' }
 ];
-
-// --- Shared Components ---
 
 export const Breadcrumbs: React.FC<{ path: { label: string; page?: Page }[]; onNavigate: (page: Page) => void }> = ({ path, onNavigate }) => (
   <nav className="flex items-center gap-2 text-[10px] font-black tracking-[0.2em] text-zinc-500 uppercase mb-12">
@@ -191,8 +198,6 @@ export const FAQItem: React.FC<{ question: string; answer: React.ReactNode }> = 
     </div>
   );
 };
-
-// --- Main App & Page Orchestrator ---
 
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<Page>('home');
@@ -243,8 +248,6 @@ const App: React.FC = () => {
     </div>
   );
 };
-
-// --- Sub-Components ---
 
 const NavBar = ({ onNavigate }: { onNavigate: (p: Page) => void }) => (
   <nav className="fixed top-0 w-full z-[100] py-8 bg-black/50 backdrop-blur-xl border-b border-white/5">
@@ -308,44 +311,15 @@ const Home = ({ onNavigate, services, ugcAds, siteContent }: { onNavigate: (p: P
       </div>
     </section>
 
-    <section className="py-32 px-6 bg-zinc-950/50">
-      <div className="max-w-7xl mx-auto">
-        <SectionHeader highlight="The Workflow" title="How We Scale Your Brand" />
-        <div className="grid md:grid-cols-3 gap-16 relative">
-          <div className="hidden md:block absolute top-1/2 left-0 w-full h-px bg-gradient-to-r from-transparent via-blue-500/20 to-transparent -translate-y-1/2 -z-10" />
-          {[
-            { icon: <Target className="text-blue-500" />, step: "01", title: "Strategy & Audit", desc: "We identify conversion gaps in your current digital ecosystem using data-driven audits." },
-            { icon: <Zap className="text-purple-500" />, step: "02", title: "AI-Powered Build", desc: "Our team engineers your custom solution, from high-speed sites to authentic UGC campaigns." },
-            { icon: <Rocket className="text-pink-500" />, step: "03", title: "Launch & Optimize", desc: "Continuous monitoring and A/B testing to ensure your ROAS keeps trending upwards." }
-          ].map((item, i) => (
-            <div key={i} className="flex flex-col items-start gap-8">
-               <div className="w-20 h-20 bg-black border border-white/10 rounded-3xl flex items-center justify-center relative">
-                  <span className="absolute -top-4 -right-4 bg-blue-600 text-white text-[10px] font-black px-2 py-1 rounded-lg">{item.step}</span>
-                  {item.icon}
-               </div>
-               <div>
-                  <h4 className="text-2xl font-bold mb-4">{item.title}</h4>
-                  <p className="text-zinc-500 leading-relaxed">{item.desc}</p>
-               </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-
     <section className="py-32 px-6">
        <div className="max-w-7xl mx-auto">
           <SectionHeader centered highlight="Success Stories" title="Trusted by Global Founders" />
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-             {[
-               { name: "Julian Thorne", company: "Lumina Tech", quote: "Web Prime AI didn't just redesign our site; they rebuilt our entire sales process. Our conversion rate jumped 42% in month one." },
-               { name: "Sarah Jenkins", company: "Aura Skincare", quote: "The UGC ads they produced feel so authentic that our target audience stopped scrolling and started buying. Absolute game changer." },
-               { name: "Mark Russo", company: "City Square Mall", quote: "The AI QR screens turned our physical traffic into digital leads instantly. The tracking dashboard is pure gold." }
-             ].map((t, i) => (
+             {siteContent.landing.testimonials.map((t, i) => (
                 <div key={i} className="glass-card p-10 rounded-[40px] border-white/5 relative">
                    <Quote className="absolute top-10 right-10 text-blue-500/10 w-20 h-20" />
                    <div className="flex gap-1 mb-8">
-                      {[1,2,3,4,5].map(s => <Star key={s} size={14} className="fill-blue-500 text-blue-500" />)}
+                      {Array.from({ length: t.rating }).map((_, s) => <Star key={s} size={14} className="fill-blue-500 text-blue-500" />)}
                    </div>
                    <p className="text-xl text-white font-light italic leading-relaxed mb-10">"{t.quote}"</p>
                    <div>
@@ -413,13 +387,7 @@ const Portfolio = ({ portfolio, onNavigate }: { portfolio: Project[], onNavigate
 );
 
 const Contact = ({ onNavigate }: { onNavigate: (p: Page) => void }) => {
-  const [formState, setFormState] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    service: '',
-    message: ''
-  });
+  const [formState, setFormState] = useState({ name: '', email: '', phone: '', service: '', message: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
@@ -475,72 +443,14 @@ const Contact = ({ onNavigate }: { onNavigate: (p: Page) => void }) => {
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <label className="text-[10px] font-black text-zinc-500 uppercase tracking-widest ml-1">Full Name</label>
-                  <input 
-                    required
-                    value={formState.name}
-                    onChange={e => setFormState({...formState, name: e.target.value})}
-                    placeholder="Enter your name" 
-                    className="w-full bg-black/40 border border-white/10 rounded-2xl px-6 py-4 focus:border-blue-500 transition-colors focus:outline-none" 
-                  />
+                  <input required value={formState.name} onChange={e => setFormState({...formState, name: e.target.value})} placeholder="Enter your name" className="w-full bg-black/40 border border-white/10 rounded-2xl px-6 py-4 focus:border-blue-500 transition-colors focus:outline-none" />
                 </div>
                 <div className="space-y-2">
                   <label className="text-[10px] font-black text-zinc-500 uppercase tracking-widest ml-1">Email Address</label>
-                  <input 
-                    required
-                    type="email"
-                    value={formState.email}
-                    onChange={e => setFormState({...formState, email: e.target.value})}
-                    placeholder="name@company.com" 
-                    className="w-full bg-black/40 border border-white/10 rounded-2xl px-6 py-4 focus:border-blue-500 transition-colors focus:outline-none" 
-                  />
+                  <input required type="email" value={formState.email} onChange={e => setFormState({...formState, email: e.target.value})} placeholder="name@company.com" className="w-full bg-black/40 border border-white/10 rounded-2xl px-6 py-4 focus:border-blue-500 transition-colors focus:outline-none" />
                 </div>
               </div>
-              
-              <div className="grid md:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <label className="text-[10px] font-black text-zinc-500 uppercase tracking-widest ml-1">Phone No</label>
-                  <input 
-                    required
-                    type="tel"
-                    value={formState.phone}
-                    onChange={e => setFormState({...formState, phone: e.target.value})}
-                    placeholder="+91 00000 00000" 
-                    className="w-full bg-black/40 border border-white/10 rounded-2xl px-6 py-4 focus:border-blue-500 transition-colors focus:outline-none" 
-                  />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-[10px] font-black text-zinc-500 uppercase tracking-widest ml-1">Service Required</label>
-                  <select 
-                    required
-                    value={formState.service}
-                    onChange={e => setFormState({...formState, service: e.target.value})}
-                    className="w-full bg-black border border-white/10 rounded-2xl px-6 py-4 focus:border-blue-500 transition-colors focus:outline-none text-white appearance-none cursor-pointer"
-                  >
-                    <option value="" disabled>Select a service</option>
-                    <option value="web-design">Website Design</option>
-                    <option value="ugc-ads">UGC Ad Production</option>
-                    <option value="qr-screens">AI QR Screen Solutions</option>
-                    <option value="growth-consulting">Growth Consulting</option>
-                    <option value="other">Other / Custom</option>
-                  </select>
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <label className="text-[10px] font-black text-zinc-500 uppercase tracking-widest ml-1">Project Message</label>
-                <textarea 
-                  required
-                  value={formState.message}
-                  onChange={e => setFormState({...formState, message: e.target.value})}
-                  placeholder="Tell us about your goals..." 
-                  className="w-full bg-black/40 border border-white/10 rounded-2xl px-6 py-4 focus:border-blue-500 transition-colors focus:outline-none min-h-[150px]" 
-                />
-              </div>
-
-              <button 
-                disabled={isSubmitting}
-                className="group w-full py-6 bg-blue-600 font-black rounded-3xl active:scale-95 transition-all shadow-xl shadow-blue-600/20 flex items-center justify-center gap-3 text-lg disabled:opacity-50"
-              >
+              <button disabled={isSubmitting} className="group w-full py-6 bg-blue-600 font-black rounded-3xl active:scale-95 transition-all shadow-xl shadow-blue-600/20 flex items-center justify-center gap-3 text-lg disabled:opacity-50">
                 {isSubmitting ? 'Sending Request...' : 'Send Inquiry'} <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>
             </form>
@@ -559,95 +469,35 @@ const Footer = ({ onNavigate, siteContent }: { onNavigate: (p: Page) => void, si
           <div className="w-10 h-10 bg-gradient-to-tr from-blue-600 to-purple-600 rounded-xl flex items-center justify-center font-black text-white">W</div>
           <span className="font-black text-2xl tracking-tighter uppercase text-white">Web Prime AI</span>
         </div>
-        <p className="text-zinc-500 text-sm leading-relaxed font-medium">
-          {siteContent.footer.tagline}
-        </p>
-        <div className="flex gap-4">
-          {[
-            { icon: <Linkedin size={18} />, url: siteContent.footer.socials.linkedin },
-            { icon: <Twitter size={18} />, url: siteContent.footer.socials.twitter },
-            { icon: <Instagram size={18} />, url: siteContent.footer.socials.instagram },
-            { icon: <Youtube size={18} />, url: siteContent.footer.socials.youtube }
-          ].map((social, i) => (
-            <a key={i} href={social.url} target="_blank" rel="noreferrer" className="w-10 h-10 rounded-xl bg-zinc-900 border border-white/5 flex items-center justify-center text-zinc-500 hover:text-white hover:border-blue-500/50 transition-all">
-              {social.icon}
-            </a>
-          ))}
-        </div>
+        <p className="text-zinc-500 text-sm leading-relaxed font-medium">{siteContent.footer.tagline}</p>
       </div>
-
       <div>
         <h4 className="text-[11px] font-black uppercase tracking-[0.2em] text-white mb-8">Solutions</h4>
         <ul className="space-y-4">
-          {[
-            { label: 'Website Design', page: 'service-web' },
-            { label: 'UGC Ad Production', page: 'service-ugc' },
-            { label: 'AI QR Integration', page: 'service-qr' },
-            { label: 'SEO Automation', page: 'services' },
-            { label: 'Growth Consulting', page: 'contact' }
-          ].map((item, i) => (
-            <li key={i}>
-              <button onClick={() => onNavigate(item.page as Page)} className="text-zinc-500 hover:text-blue-500 transition-colors text-sm font-medium">
-                {item.label}
-              </button>
-            </li>
+          {['Website Design', 'UGC Ads', 'AI QR Integration'].map((item, i) => (
+            <li key={i}><button onClick={() => onNavigate('services')} className="text-zinc-500 hover:text-blue-500 transition-colors text-sm font-medium">{item}</button></li>
           ))}
         </ul>
       </div>
-
       <div>
         <h4 className="text-[11px] font-black uppercase tracking-[0.2em] text-white mb-8">Company</h4>
         <ul className="space-y-4">
-          {[
-            { label: 'About Us', page: 'about' },
-            { label: 'Case Studies', page: 'portfolio' },
-            { label: 'Insights Blog', page: 'blog' },
-            { label: 'Career Hub', page: 'contact' },
-            { label: 'Partner Program', page: 'contact' }
-          ].map((item, i) => (
-            <li key={i}>
-              <button onClick={() => onNavigate(item.page as Page)} className="text-zinc-500 hover:text-blue-500 transition-colors text-sm font-medium">
-                {item.label}
-              </button>
-            </li>
+          {['About Us', 'Portfolio', 'Insights Blog'].map((item, i) => (
+            <li key={i}><button onClick={() => onNavigate('about')} className="text-zinc-500 hover:text-blue-500 transition-colors text-sm font-medium">{item}</button></li>
           ))}
         </ul>
       </div>
-
       <div className="space-y-8">
-        <div>
-          <h4 className="text-[11px] font-black uppercase tracking-[0.2em] text-white mb-8">Newsletter</h4>
-          <p className="text-zinc-500 text-sm mb-6 leading-relaxed">Get AI insights & updates directly in your inbox.</p>
-          <div className="relative group">
-            <input type="email" placeholder="Your email address" className="w-full bg-zinc-900 border border-white/5 rounded-2xl px-6 py-4 text-xs font-medium focus:outline-none focus:border-blue-500/50 transition-all pr-12" />
-            <button className="absolute right-2 top-2 bottom-2 aspect-square bg-blue-600 rounded-xl flex items-center justify-center text-white hover:bg-blue-700 transition-colors">
-              <ArrowRight size={16} />
-            </button>
-          </div>
-        </div>
-        <div className="space-y-3">
-          <div className="flex items-center gap-3 text-zinc-500 text-sm">
-            <Mail size={16} className="text-blue-500" /> {siteContent.footer.email}
-          </div>
-          <div className="flex items-center gap-3 text-zinc-500 text-sm">
-            <MapPin size={16} className="text-blue-500" /> {siteContent.footer.location}
-          </div>
+        <h4 className="text-[11px] font-black uppercase tracking-[0.2em] text-white mb-8">Newsletter</h4>
+        <div className="relative group">
+          <input type="email" placeholder="Your email address" className="w-full bg-zinc-900 border border-white/5 rounded-2xl px-6 py-4 text-xs font-medium focus:outline-none focus:border-blue-500/50 transition-all pr-12" />
+          <button className="absolute right-2 top-2 bottom-2 aspect-square bg-blue-600 rounded-xl flex items-center justify-center text-white hover:bg-blue-700 transition-colors"><ArrowRight size={16} /></button>
         </div>
       </div>
     </div>
-
-    <div className="max-w-7xl mx-auto pt-12 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-8">
-      <div className="text-zinc-600 text-[11px] font-black uppercase tracking-widest">
-        © 2025 WEB PRIME AI. ALL RIGHTS RESERVED.
-      </div>
-      <div className="flex flex-wrap justify-center gap-8">
-        {['Privacy Policy', 'Terms of Service', 'Cookie Policy'].map((link, i) => (
-          <button key={i} className="text-zinc-600 hover:text-white text-[10px] font-black uppercase tracking-widest transition-colors">{link}</button>
-        ))}
-      </div>
-      <button onClick={() => onNavigate('admin-login')} className="flex items-center gap-2 text-zinc-800 hover:text-zinc-400 transition-colors text-[10px] uppercase font-black tracking-widest">
-        <Lock size={12} /> Command Center
-      </button>
+    <div className="max-w-7xl mx-auto pt-12 border-t border-white/5 flex items-center justify-between">
+      <div className="text-zinc-600 text-[11px] font-black uppercase tracking-widest">© 2025 WEB PRIME AI. ALL RIGHTS RESERVED.</div>
+      <button onClick={() => onNavigate('admin-login')} className="flex items-center gap-2 text-zinc-800 hover:text-zinc-400 transition-colors text-[10px] uppercase font-black tracking-widest"><Lock size={12} /> Command Center</button>
     </div>
   </footer>
 );
