@@ -1,0 +1,8 @@
+{
+  "name": "Web Prime AI | Digital Agency",
+  "description": "High-converting Website Design, UGC Ads, and AI QR Screen solutions for modern brands.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
