@@ -252,15 +252,32 @@ const App: React.FC = () => {
 const NavBar = ({ onNavigate }: { onNavigate: (p: Page) => void }) => (
   <nav className="fixed top-0 w-full z-[100] py-8 bg-black/50 backdrop-blur-xl border-b border-white/5">
     <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-      <div className="flex items-center gap-3 cursor-pointer" onClick={() => onNavigate('home')}>
-        <div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center font-black">W</div>
-        <span className="font-black text-2xl tracking-tighter uppercase">Web Prime AI</span>
+      <div className="flex items-center gap-4 cursor-pointer group" onClick={() => onNavigate('home')}>
+        <div className="relative">
+          {/* Subtle logo glow effect */}
+          <div className="absolute inset-0 bg-blue-600 blur-xl opacity-20 group-hover:opacity-40 transition-opacity"></div>
+          <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" className="relative z-10 animate-subtle-float">
+            <rect x="2" y="2" width="40" height="40" rx="12" stroke="white" strokeWidth="2" strokeOpacity="0.1" />
+            <path d="M14 16L22 28L30 16" stroke="url(#nav-logo-grad)" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+            <circle cx="22" cy="22" r="5" fill="url(#nav-logo-grad)" className="animate-pulse" />
+            <defs>
+              <linearGradient id="nav-logo-grad" x1="14" y1="16" x2="30" y2="28" gradientUnits="userSpaceOnUse">
+                <stop stopColor="#3b82f6" />
+                <stop offset="0.5" stopColor="#8b5cf6" />
+                <stop offset="1" stopColor="#ec4899" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <span className="font-black text-3xl tracking-tighter uppercase gradient-text transition-all group-hover:scale-105 origin-left">
+          Web Prime AI
+        </span>
       </div>
-      <div className="hidden md:flex gap-8 font-bold text-[13px] text-zinc-500 uppercase tracking-widest">
+      <div className="hidden md:flex gap-8 font-bold text-[13px] text-zinc-500 uppercase tracking-widest items-center">
         {['home', 'about', 'services', 'portfolio', 'blog'].map(p => (
           <button key={p} onClick={() => onNavigate(p as Page)} className="hover:text-white transition-colors">{p}</button>
         ))}
-        <button onClick={() => onNavigate('contact')} className="bg-blue-600 hover:bg-blue-700 px-8 py-2.5 rounded-xl text-white transition-all shadow-lg shadow-blue-600/20 active:scale-95 ml-4">Get Started</button>
+        <button onClick={() => onNavigate('contact')} className="bg-blue-600 hover:bg-blue-700 px-8 py-3 rounded-xl text-white transition-all shadow-lg shadow-blue-600/20 active:scale-95 ml-4 text-[11px] font-black">Get Started</button>
       </div>
     </div>
   </nav>
