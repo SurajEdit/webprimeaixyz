@@ -3,19 +3,10 @@ import React from 'react';
 import { 
   ArrowRight, 
   QrCode, 
-  BarChart3, 
-  Target, 
-  Zap, 
-  Globe, 
-  Smartphone, 
-  Monitor,
-  CheckCircle2,
-  Lock,
-  MessageSquare,
   Sparkles,
   Check
 } from 'lucide-react';
-import { Breadcrumbs, SectionHeader } from '../App';
+import { Breadcrumbs, SectionHeader } from '../components/Shared';
 import { Page, Service } from '../types';
 
 interface QrScreenLandingProps {

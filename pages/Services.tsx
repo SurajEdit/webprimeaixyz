@@ -1,10 +1,9 @@
 
 import React from 'react';
 import { 
-  ArrowRight, Layout, Video, QrCode, Zap, BarChart3, 
-  Code, Megaphone, Smartphone, Search, Layers, PlayCircle, Check
+  ArrowRight, Layout, Video, QrCode, Zap, Check
 } from 'lucide-react';
-import { Breadcrumbs, SectionHeader } from '../App';
+import { Breadcrumbs, SectionHeader } from '../components/Shared';
 import { Page, Service } from '../types';
 
 export const Services: React.FC<{ onNavigate: (p: Page) => void, services: Service[] }> = ({ onNavigate, services }) => {

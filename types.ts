@@ -104,8 +104,12 @@ export interface Project {
   category: string;
   stat: string;
   description: string;
-  image: string;
+  image: string; // Acts as thumbnail
+  videoUrl?: string;
+  externalLink?: string;
+  mediaType: 'image' | 'video' | 'link';
   visibility: 'show' | 'hide';
+  tags: string[];
 }
 
 export interface UgcAd {
@@ -113,6 +117,7 @@ export interface UgcAd {
   title: string;
   creator: string;
   description: string;
+  category: string;
   platform: 'TikTok' | 'Meta' | 'YouTube' | 'Custom';
   thumbnail: string;
   videoUrl: string;

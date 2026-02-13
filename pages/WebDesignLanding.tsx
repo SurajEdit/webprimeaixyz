@@ -3,12 +3,10 @@ import React from 'react';
 import { 
   ArrowRight, 
   Layout, 
-  Smartphone, 
   Zap, 
-  MessageCircle, 
   Check
 } from 'lucide-react';
-import { Breadcrumbs, SectionHeader, FAQItem } from '../App';
+import { Breadcrumbs, SectionHeader, FAQItem } from '../components/Shared';
 import { Page, Service } from '../types';
 
 interface WebDesignLandingProps {

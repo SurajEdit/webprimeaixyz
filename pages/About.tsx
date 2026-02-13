@@ -1,10 +1,10 @@
 
 import React from 'react';
 import { 
-  ArrowRight, ShieldCheck, Zap, Users, Sparkles, 
-  Target, Rocket, Globe, Code, BrainCircuit
+  ShieldCheck, Zap, Users, 
+  Target, Rocket
 } from 'lucide-react';
-import { Breadcrumbs, SectionHeader } from '../App';
+import { Breadcrumbs, SectionHeader } from '../components/Shared';
 import { Page, SiteContent } from '../types';
 
 export const About: React.FC<{ onNavigate: (p: Page) => void, siteContent: SiteContent }> = ({ onNavigate, siteContent }) => {

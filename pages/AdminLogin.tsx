@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import { Lock, User, ArrowRight, ShieldCheck } from 'lucide-react';
 import { Page } from '../types';
 
+const LOGO_URL = "https://lh3.googleusercontent.com/a/ACg8ocJoqFrWgOQ0WElWvr4IsZUCF6IUmNAxphg9XsImWylZijxOgg8=s400-c";
+
 export const AdminLogin: React.FC<{ onLogin: () => void; onBack: () => void }> = ({ onLogin, onBack }) => {
   const [userId, setUserId] = useState('');
   const [password, setPassword] = useState('');
@@ -24,8 +26,10 @@ export const AdminLogin: React.FC<{ onLogin: () => void; onBack: () => void }> =
       
       <div className="w-full max-w-md">
         <div className="text-center mb-12">
-          <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-tr from-blue-600 to-purple-600 rounded-[28px] font-black text-4xl shadow-2xl mb-8">W</div>
-          <h1 className="text-3xl font-black tracking-tighter mb-2">Agency Command Center</h1>
+          <div className="inline-flex items-center justify-center w-24 h-24 bg-zinc-900 rounded-[32px] overflow-hidden shadow-2xl mb-8 border border-white/10">
+            <img src={LOGO_URL} alt="Web Prime AI" className="w-full h-full object-cover" />
+          </div>
+          <h1 className="text-3xl font-black tracking-tighter mb-2 uppercase">Agency Command Center</h1>
           <p className="text-zinc-500 font-medium">Authorized personnel only</p>
         </div>
 
@@ -69,7 +73,7 @@ export const AdminLogin: React.FC<{ onLogin: () => void; onBack: () => void }> =
 
             <button 
               type="submit" 
-              className="group w-full py-5 bg-white text-black font-black rounded-2xl shadow-xl hover:bg-zinc-200 transition-all flex items-center justify-center gap-3 text-lg"
+              className="group w-full py-5 bg-white text-black font-black rounded-2xl shadow-xl hover:bg-zinc-200 transition-all flex items-center justify-center gap-3 text-lg uppercase"
             >
               Access Dashboard <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </button>
